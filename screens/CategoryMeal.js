@@ -13,8 +13,9 @@ const categotyMeal = (props) => {
         duration={itemData.item.duration}
         complexity={itemData.item.complexity}
         affordability={itemData.item.affordability}
+        image={itemData.item.imageUrl}
         onSelect={()=>{
-            props.navigation.navigate('MealDetails');
+            props.navigation.navigate('MealDetails',{meal: itemData.item});
         }}/>
     }
     return (
