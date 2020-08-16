@@ -1,16 +1,21 @@
 import React from 'react';
 import {View,Text,StyleSheet,Button,FlatList} from 'react-native';
 import {MEALS} from '../data/dummy-data';
-
+import MealItem from '../components/MealItem';
 const categotyMeal = (props) => {
     const catId = props.navigation.getParam('category').id;
 
     const meals = MEALS.filter((meal)=> meal.categoryIds.includes(catId));
 
     const renderItems = (itemData) => {
-        return (
-            <View><Text>{itemData.item.title}</Text></View>
-        )
+        return <MealItem 
+        title={itemData.item.title} 
+        duration={itemData.item.duration}
+        complexity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+        onSelect={()=>{
+            props.navigation.navigate('MealDetails');
+        }}/>
     }
     return (
         <View style={styles.screen}>
