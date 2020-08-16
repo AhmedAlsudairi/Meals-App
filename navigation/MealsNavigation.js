@@ -25,11 +25,25 @@ const MealsNavigator = createStackNavigator({
     }
 })
 
+const FavoriteNavigator = createStackNavigator({
+    Favorite: {
+        screen: FavoriteScreen
+    },
+    MealDetails: {
+        screen: MealDetailsScreen
+    }
+},
+{
+    defaultNavigationOptions: {
+        headerTintColor: colors.primary
+    }
+})
+
 const MealTabNavigator = createBottomTabNavigator({
     all: {screen: MealsNavigator, navigationOptions: {
         tabBarIcon: (iconInfo) => <Ionicons name='ios-restaurant' size={20} color={iconInfo.tintColor}/>
     } },
-    favorite: {screen: FavoriteScreen, navigationOptions: {
+    favorite: {screen: FavoriteNavigator, navigationOptions: {
         tabBarIcon: (iconInfo) => <Ionicons name='ios-star' size={20} color={iconInfo.tintColor}/>
     }}
 },{

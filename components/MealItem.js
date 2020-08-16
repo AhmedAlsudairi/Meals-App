@@ -26,22 +26,25 @@ const styles = StyleSheet.create({
     item: {
         flex: 1,
         height: 150,
-        marginVertical: 10
+        marginVertical: 10,
+        alignItems: 'center'
     },
     itemContainer: {
         flex: 1,
         alignItems: 'center',
-        borderRadius: 5,
+        justifyContent: 'center',
+        width: '80%',
+        borderRadius: 10,
         overflow: 'hidden'
     },
     rowItem: {
         flex: 1,
-        width: '80%',
+        width: '100%',
         backgroundColor: 'lightgray'
     },
     header: {
         height: 150,
-        flex: 3
+        flex: 3,
     },
     details: {
         flexDirection: 'row',
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         paddingVertical: 5,
         paddingHorizontal: 12,
-        justifyContent: 'flex-end',
+        flexDirection: 'column-reverse',
         width: '100%'
     }
 })
