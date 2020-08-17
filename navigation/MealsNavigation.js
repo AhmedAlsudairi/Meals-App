@@ -7,7 +7,9 @@ import MealDetailsScreen from '../screens/MealDetailsScreen';
 import colors from '../constants/colors';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import FavoriteScreen from '../screens/FavoritesScreen';
-import {Ionicons} from '@expo/vector-icons'
+import {Ionicons} from '@expo/vector-icons';
+import {createDrawerNavigator} from 'react-navigation-drawer';
+import FilterScreen from '../screens/FiltersScreen';
 const MealsNavigator = createStackNavigator({
     Categories: {
         screen: CategoriesScreen
@@ -39,8 +41,9 @@ const FavoriteNavigator = createStackNavigator({
     }
 })
 
+
 const MealTabNavigator = createBottomTabNavigator({
-    all: {screen: MealsNavigator, navigationOptions: {
+    Meals: {screen: MealsNavigator, navigationOptions: {
         tabBarIcon: (iconInfo) => <Ionicons name='ios-restaurant' size={20} color={iconInfo.tintColor}/>
     } },
     favorite: {screen: FavoriteNavigator, navigationOptions: {
@@ -51,4 +54,16 @@ const MealTabNavigator = createBottomTabNavigator({
         activeTintColor: colors.primary
     }
 })
-export default createAppContainer(MealTabNavigator);
+
+const FilterNavigator = createStackNavigator({
+    Filters: FilterScreen
+},{
+    defaultNavigationOptions: {
+        headerTintColor: colors.primary
+    }
+})
+const MainNavigator = createDrawerNavigator({
+    Meals : MealTabNavigator,
+    Filters: FilterNavigator
+})
+export default createAppContainer(MainNavigator);

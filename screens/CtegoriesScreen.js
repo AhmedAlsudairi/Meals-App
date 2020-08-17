@@ -3,7 +3,9 @@ import {View,Text,StyleSheet, Button,FlatList,TouchableOpacity} from 'react-nati
 import {CATEGORIES} from '../data/dummy-data';
 import colors from '../constants/colors';
 import { createAppContainer } from 'react-navigation';
-import CategoryItem from '../components/CategotyItem'
+import CategoryItem from '../components/CategotyItem';
+import HeaderButton from '../components/HeaderButton';
+import {HeaderButtons,Item} from 'react-navigation-header-buttons';
 const ctegories = (props) => {
 
     const renderItems = (category) => {
@@ -25,9 +27,23 @@ const ctegories = (props) => {
     
 }
 
-ctegories.navigationOptions = {
-    headerTitle: 'Meal Categories'
+ctegories.navigationOptions = props => {
+  return{
+    headerTitle: 'Meal Categories',
+    headerLeft: 
+    <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        <Item 
+        title='Menu'
+        iconName='ios-menu'
+        color ={colors.primary}
+        onPress={()=>{
+            props.navigation.toggleDrawer()
+        }
+        }/>
+    </HeaderButtons>
+}  
 }
+
 
 const styles = StyleSheet.create({
     

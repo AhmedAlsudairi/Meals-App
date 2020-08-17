@@ -4,7 +4,7 @@ import {Ionicons} from '@expo/vector-icons'
 const headerButton = (props) => {
 
     return(
-        <HeaderButton {...props} IconComponent={Ionicons} iconSize={15}/>
+        <HeaderButton {...props} IconComponent={Ionicons} iconSize={25}/>
     );
 }
 
