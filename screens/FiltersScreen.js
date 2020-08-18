@@ -1,37 +1,54 @@
-import React, {useState} from 'react';
-import {View,Text,StyleSheet} from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import HeaderButton from '../components/HeaderButton';
-import {HeaderButtons,Item} from 'react-navigation-header-buttons';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import colors from '../constants/colors';
 import FilterSwitch from '../components/FilterSwitch';
+
 const filters = (props) => {
-    const [isGlutenFree,setIsGlutenFree] = useState(false);
-    const [isLactoseFree,setIsLactoseFree] = useState(false);
-    const [isVegan,setIsVegan] = useState(false);
-    const [isVagetarian,setIsVagetarian] = useState(false);
+    const [isGlutenFree, setIsGlutenFree] = useState(false);
+    const [isLactoseFree, setIsLactoseFree] = useState(false);
+    const [isVegan, setIsVegan] = useState(false);
+    const [isVagetarian, setIsVagetarian] = useState(false);
+
+    const saveFilters = useCallback(() => {
+        const filters = {
+            GlutenFree: isGlutenFree,
+            LactoseFree: isLactoseFree,
+            Vegan: isVegan,
+            Vagetarian: isVagetarian
+        }
+
+        console.log(filters);
+    }, [isGlutenFree, isLactoseFree, isVegan, isVagetarian])
+
+    useEffect(() => {
+        props.navigation.setParams({ save: saveFilters });
+    }, [saveFilters])
+
     return (
         <View style={styles.screen}>
             <Text style={styles.title}>Filters</Text>
             <View style={styles.filtersContainer}>
-                <FilterSwitch 
-                title='Gluten-free'
-                value={isGlutenFree}
-                onChange={(newValue)=>{setIsGlutenFree(newValue)}}
+                <FilterSwitch
+                    title='Gluten-free'
+                    value={isGlutenFree}
+                    onChange={(newValue) => { setIsGlutenFree(newValue) }}
                 />
-                <FilterSwitch 
-                title='Lactose-free'
-                value={isLactoseFree}
-                onChange={(newValue)=>{setIsLactoseFree(newValue)}}
+                <FilterSwitch
+                    title='Lactose-free'
+                    value={isLactoseFree}
+                    onChange={(newValue) => { setIsLactoseFree(newValue) }}
                 />
-                <FilterSwitch 
-                title='Vegan'
-                value={isVegan}
-                onChange={(newValue)=>{setIsVegan(newValue)}}
+                <FilterSwitch
+                    title='Vegan'
+                    value={isVegan}
+                    onChange={(newValue) => { setIsVegan(newValue) }}
                 />
-                <FilterSwitch 
-                title='Vagetarian'
-                value={isVagetarian}
-                onChange={(newValue)=>{setIsVagetarian(newValue)}}
+                <FilterSwitch
+                    title='Vagetarian'
+                    value={isVagetarian}
+                    onChange={(newValue) => { setIsVagetarian(newValue) }}
                 />
             </View>
         </View>
@@ -39,26 +56,35 @@ const filters = (props) => {
 }
 
 filters.navigationOptions = props => {
-    return{
-      headerTitle: 'Filter Meal',
-      headerLeft: 
-      <HeaderButtons HeaderButtonComponent={HeaderButton}>
-          <Item 
-          title='Menu'
-          iconName='ios-menu'
-          iconSize={25}
-          color= {colors.primary}
-          onPress={()=>{
-              props.navigation.toggleDrawer()
-          }
-          }/>
-      </HeaderButtons>
-  }  
-  }
+    return {
+        headerTitle: 'Filter Meal',
+        headerLeft: () =>
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                    title='Menu'
+                    iconName='ios-menu'
+                    iconSize={25}
+                    color={colors.primary}
+                    onPress={() => {
+                        props.navigation.toggleDrawer()
+                    }
+                    } />
+            </HeaderButtons>,
+        headerRight: () =>
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item
+                    title='Menu'
+                    iconName='ios-save'
+                    iconSize={25}
+                    color={colors.primary}
+                    onPress={props.navigation.getParam('save')} />
+            </HeaderButtons>
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {
-        flex:1 
+        flex: 1
     },
     title: {
         marginVertical: 10,
@@ -71,4 +97,6 @@ const styles = StyleSheet.create({
         padding: 10
     }
 })
+
+
 export default filters;

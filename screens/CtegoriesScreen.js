@@ -1,8 +1,7 @@
 import React from 'react';
-import {View,Text,StyleSheet, Button,FlatList,TouchableOpacity} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import {CATEGORIES} from '../data/dummy-data';
-import colors from '../constants/colors';
-import { createAppContainer } from 'react-navigation';
+import colors from '../constants/colors'
 import CategoryItem from '../components/CategotyItem';
 import HeaderButton from '../components/HeaderButton';
 import {HeaderButtons,Item} from 'react-navigation-header-buttons';
