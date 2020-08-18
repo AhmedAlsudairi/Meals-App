@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { View, StyleSheet, Image, ScrollView } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import DefaultText from '../components/DefaultText';
+import {useDispatch} from 'react-redux';
+import {toggleFavorite} from '../store/actions/mealActions';
 const mealDetails = (props) => {
 
 
     const meal = props.navigation.getParam('meal');
+
+    const dispatch = useDispatch();
+
+    const toggleFavoriteDispatch = useCallback(() => {
+        dispatch(toggleFavorite(meal))
+    }, [meal])
+
+    useEffect(()=>{
+        props.navigation.setParams({toggleFav: toggleFavoriteDispatch}); 
+    },[dispatch])
+    
 
     return (
         <ScrollView >
@@ -34,11 +47,12 @@ const mealDetails = (props) => {
 
 mealDetails.navigationOptions = props => {
     const mealTitle = props.navigation.getParam('meal').title;
+    const toggleFav = props.navigation.getParam('toggleFav')
     return {
         headerTitle: mealTitle,
         headerRight:
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title='Favorite' iconName='ios-star' onPress={() => { console.log('hi'); }} />
+                <Item title='Favorite' iconName='ios-star' onPress={toggleFav} />
             </HeaderButtons>
     }
 }

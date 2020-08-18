@@ -5,8 +5,6 @@ import {HeaderButtons,Item} from 'react-navigation-header-buttons';
 import colors from '../constants/colors';
 import {useSelector} from 'react-redux';
 
-
-
 const favorites = (props) => {
     const favoriteMeals = useSelector((state)=>state.meals.favoriteMeals);
 
