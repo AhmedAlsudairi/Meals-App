@@ -1,6 +1,7 @@
 import React from 'react';
 import {View,FlatList,StyleSheet} from 'react-native'; 
 import MealItem from '../components/MealItem';
+
 const categoryItem = (props) => {
 
     const renderItems = (itemData) => {
